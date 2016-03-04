@@ -7,6 +7,8 @@ import React, {
   AppRegistry,
   Component,
   StyleSheet,
+  TouchableHighlight,
+  Image,
   Text,
   View
 } from 'react-native';
@@ -15,17 +17,38 @@ class Botmote extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
+      <TouchableHighlight onPress={this._onPressButton}>
+        <Image
+          style={styles.icon}
+          source={require('./assets/Up-104.png')}
+        />
+      </TouchableHighlight>
+      <View style={styles.leftRightContainer}>
+        <TouchableHighlight onPress={this._onPressButton}>
+          <Image
+            style={styles.icon}
+            source={require('./assets/Left-104.png')}
+          />
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._onPressButton}>
+          <Image
+            style={styles.icon}
+            source={require('./assets/Right-104.png')}
+          />
+        </TouchableHighlight>
+      </View>
+      <TouchableHighlight onPress={this._onPressButton}>
+        <Image
+          style={styles.icon}
+          source={require('./assets/Down-104.png')}
+        />
+      </TouchableHighlight>
       </View>
     );
+  }
+
+  _onPressButton() {
+    console.log('Hi there');
   }
 }
 
@@ -41,11 +64,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  leftRightContainer: {
+    flexDirection: 'row'
+  }
 });
 
 AppRegistry.registerComponent('Botmote', () => Botmote);
