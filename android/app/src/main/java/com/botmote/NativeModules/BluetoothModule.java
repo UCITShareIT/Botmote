@@ -205,8 +205,7 @@ public class BluetoothModule extends ReactContextBaseJavaModule {
                 }
             };
             BluetoothLE.sharedManager().leHandler = mLeHandler;
-//            devAdapter = new DeviceListAdapter(this,BluetoothLE.sharedManager().getDeviceList(),R.layout.device_list_item);
-//            MeTimer.startWrite();
+            MeTimer.startWrite();
         }
     }
 }
