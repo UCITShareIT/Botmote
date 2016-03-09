@@ -162,7 +162,7 @@ public class BluetoothLE extends Service {
 			mBuffersIndex++;
 		}
 		//TODO: Figure out if we need this
-		//MeTimer.startWrite();
+		MeTimer.startWrite();
 	}
 	public boolean writeSingleBuffer(){
 		BluetoothGattCharacteristic ch = characteristicForProperty(BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE);

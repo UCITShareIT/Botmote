@@ -9,6 +9,7 @@ import React, {
   Component,
   StyleSheet,
   ListView,
+  TouchableOpacity,
   TouchableHighlight,
   Image,
   Text,
@@ -80,56 +81,53 @@ class Botmote extends Component {
     this.showDevicesList = this.showDevicesList.bind(this);
   }
 
-  componentWillMount() {
-    console.log('didMount');
-    // console.log(`Emitter: ${DeviceEventEmitter.toString()}`);
-    DeviceEventEmitter.addListener('foundDevices', (e) => {
-      const devices = e.deviceList;
-      const devicesArray = [];
-      for (let i = 0; i < devices.length; i++) {
-        devicesArray.push(devices[i]);
-      }
-      this.props.onDeviceFound(devicesArray);
-      console.log(devicesArray);
-    });
-    BluetoothLE.start();
-  }
-
   render() {
     console.log('rendering!');
     return (
       <View style={styles.container}>
         {/* Up Button*/}
-        <TouchableHighlight underlayColor='#F5FCFF' onPress={this.didPressUpButton}>
+        <View underlayColor='#F5FCFF'
+              onStartShouldSetResponder={() => true}
+              onResponderMove={this.didPressUpButton}
+              onResponderRelease={this.didEndButtonPress}>
           <Image
             style={styles.icon}
             source={require('./assets/Up-104.png')}
           />
-        </TouchableHighlight>
+        </View>
         {/* Container for left and right buttons */}
         <View style={styles.leftRightContainer}>
           {/* left button */}
-          <TouchableHighlight underlayColor='#F5FCFF' onPress={this.didPressLeftButton}>
+          <View underlayColor='#F5FCFF'
+                onStartShouldSetResponder={() => true}
+                onResponderMove={this.didPressLeftButton}
+                onResponderRelease={this.didEndButtonPress}>
             <Image
               style={styles.icon}
               source={require('./assets/Left-104.png')}
             />
-          </TouchableHighlight>
+          </View>
           {/* right button */}
-          <TouchableHighlight underlayColor='#F5FCFF' onPress={this.didPressRightButton}>
+          <View underlayColor='#F5FCFF'
+                onStartShouldSetResponder={() => true}
+                onResponderMove={this.didPressRightButton}
+                onResponderRelease={this.didEndButtonPress}>
             <Image
               style={styles.icon}
               source={require('./assets/Right-104.png')}
             />
-          </TouchableHighlight>
+          </View>
         </View>
         {/* down button */}
-        <TouchableHighlight underlayColor='#F5FCFF' onPress={this.didPressDownButton}>
+        <View underlayColor='#F5FCFF'
+              onStartShouldSetResponder={() => true}
+              onResponderMove={this.didPressDownButton}
+              onResponderRelease={this.didEndButtonPress}>
           <Image
             style={styles.icon}
             source={require('./assets/Down-104.png')}
           />
-        </TouchableHighlight>
+        </View>
         <View style={styles.showDevicesContainer}>
           <TouchableHighlight underlayColor='#F5FCFF' onPress={() => {
             this.props.navigator.push({ id: 'deviceList' });
@@ -145,18 +143,27 @@ class Botmote extends Component {
   //Button actions
   didPressUpButton() {
     console.log('Move forward');
+    BluetoothLE.moveUp();
   }
 
   didPressDownButton() {
     console.log('Move backward');
+    BluetoothLE.moveDown();
   }
 
   didPressLeftButton() {
     console.log('Move left');
+    BluetoothLE.moveLeft();
   }
 
   didPressRightButton() {
     console.log('Move right');
+    BluetoothLE.moveRight();
+  }
+
+  didEndButtonPress() {
+    console.log('Stop moving');
+    BluetoothLE.stopMoving();
   }
 
   showDevicesList() {
@@ -189,6 +196,22 @@ class BotmoteNavigator extends Component {
       }
       return false;
     });
+
+    DeviceEventEmitter.addListener('foundDevices', (e) => {
+      const devices = e.deviceList;
+      const devicesArray = [];
+      for (let i = 0; i < devices.length; i++) {
+        devicesArray.push(devices[i]);
+      }
+      this.setState({devices: devices});
+      console.log(devicesArray);
+    });
+
+    DeviceEventEmitter.addListener('deviceConnection', (connection) => {
+      const status = connection.status;
+      console.log('connected to device!!!!!!');
+    });
+    BluetoothLE.start();
   }
 
   renderScene(route, nav) {
@@ -199,7 +222,7 @@ class BotmoteNavigator extends Component {
       default:
         this.onMainScreen = true;
         return (
-          <Botmote selectedDevice={this.state.selectedDevice} onDeviceFound={(devices) => {this.setState({devices: devices})}} navigator={nav}/>
+          <Botmote selectedDevice={this.state.selectedDevice} navigator={nav}/>
         );
     }
   }
@@ -222,6 +245,7 @@ class BotmoteNavigator extends Component {
     this.setState({
       selectedDevice: device
     });
+    BluetoothLE.connectDevice(0);
     this._navigator.pop();
   }
 

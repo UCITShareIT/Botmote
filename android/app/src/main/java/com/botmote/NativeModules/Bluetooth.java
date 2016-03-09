@@ -1,4 +1,4 @@
-package com.botmote;
+package com.botmote.NativeModules;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +23,8 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+
+import com.botmote.R;
 
 @SuppressLint("NewApi")
 public class Bluetooth extends Service{
