@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Botmote</string>
+    <string name="refresh">Refresh</string>
+    <string name="connecting">Device Connecting</string>
+    <string name="connected">Connected</string>
+    <string name="connectfail">Connect Fail</string>
+    <string name="selectdevice">Select Device</string>
+    <string name="bonded">Bonded</string>
+    <string name="unbond">Unbond</string>
 </resources>

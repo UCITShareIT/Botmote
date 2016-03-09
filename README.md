@@ -40,3 +40,6 @@ Ensure your BIOS settings allow for hardware virtualization
 
 ### Logging
 To view console.log statements in Android, run: `adb logcat *:S ReactNative:V ReactNativeJS:V`
+
+### Run on Device
+To access files over localhost on a device run `adb reverse tcp:8081 tcp:8081`
