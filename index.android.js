@@ -9,7 +9,6 @@ import React, {
   Component,
   StyleSheet,
   ListView,
-  TouchableOpacity,
   TouchableHighlight,
   Image,
   Text,
@@ -78,7 +77,6 @@ class Botmote extends Component {
   constructor() {
     super();
     this.didPressRightButton = this.didPressRightButton.bind(this);
-    this.showDevicesList = this.showDevicesList.bind(this);
   }
 
   render() {
@@ -164,13 +162,6 @@ class Botmote extends Component {
   didEndButtonPress() {
     console.log('Stop moving');
     BluetoothLE.stopMoving();
-  }
-
-  showDevicesList() {
-    console.log('Show devices');
-    this.setState({
-      showDevices: true
-    });
   }
 }
 
