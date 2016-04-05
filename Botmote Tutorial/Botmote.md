@@ -48,9 +48,15 @@ Now let's run the default React Native project.
  3. Back in the shell, run `npm start`.
 2. Open another shell window and run`react-native run-android`. 
 	
-## Learning React Native
+## Let's Code!
+As mentioned above, our first goal will be to get four buttons on screen for Up, Down, Left, and Right. Along the way we'll learn JavaScript and React Native. 
 
-React Native is a tool developed by Facebook that allows you to write apps for iOS and Android using JavaScript. Today we'll get started by getting the default React Native project to run and then we'll add the four buttons to the screen to control the robots. 
+1. We need some arrow images to use for our button backgrounds. Download them from the links below:
+	1. Up Arrow: https://github.com/UCITShareIT/Botmote/blob/master/assets/Up-104.png
+	2. Down Arrow: https://github.com/UCITShareIT/Botmote/blob/master/assets/Down-104.png
+	3. Left Arrow: https://github.com/UCITShareIT/Botmote/blob/master/assets/Left-104.png
+	4. Right Arrow: https://github.com/UCITShareIT/Botmote/blob/master/assets/Right-104.png
+2. Once you've downloaded all of the these images, copy them into the assets/ folder in the Botmote project. 
 
 
 ## Intro to JavaScript
